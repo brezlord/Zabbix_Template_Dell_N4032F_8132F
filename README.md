@@ -6,6 +6,6 @@ This is a Zabbix template that can be used to monitor the Dell Networking N4032F
 # Installation
 Import the template. If you do not all ready have the linked templates installed you will get an error so import them first.
 
-Switch template name: Dell EMC Networking N4000 Series Switch
-Linked template 1 name: Template Module Interfaces SNMPv2
-Linked template 2 name: Template Module ICMP Ping
+Switch template name: Dell EMC Networking N4000 Series Switch<br>
+Linked template 1 name: Template Module Interfaces SNMPv2<br>
+Linked template 2 name: Template Module ICMP Ping<br>
