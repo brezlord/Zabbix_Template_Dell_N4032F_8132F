@@ -1,4 +1,4 @@
-# Zabbix_Template_Dell_N4032F_8132F
+# Zabbix Template Dell N4032F & 8132F
 Zabbix Template for Dell Networking N4032F and PowerConnect 8132F
 
 This is a Zabbix template that can be used to monitor the Dell Networking N4032F and PowerConnect 8132F switches. This template will mmost likely for with the N4032/8132 but I have not tested these switches.
