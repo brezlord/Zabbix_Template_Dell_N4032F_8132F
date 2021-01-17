@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2021-01-17T10:58:34Z</date>
+    <groups>
+        <group>
+            <name>Templates/Network devices</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Dell EMC Networking N4000 Series Switch</template>
+            <name>Template Dell EMC Networking N4000 Series Switch</name>
+            <templates>
+                <template>
+                    <name>Template Module ICMP Ping</name>
+                </template>
+                <template>
+                    <name>Template Module Interfaces SNMPv2</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Templates/Network devices</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Fans</name>
+                </application>
+                <application>
+                    <name>Power Supply</name>
+                </application>
+                <application>
+                    <name>Product Identification</name>
+                </application>
+                <application>
+                    <name>Temperature</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Power Supply 1 Load</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.110.7.2.1.5.10</snmp_oid>
+                    <key>powerSupply1Load[{#SNMPVALUE}]</key>
+                    <units>W</units>
+                    <applications>
+                        <application>
+                            <name>Power Supply</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Power Supply 1 Status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.674.10895.3000.1.2.110.7.2.1.3.10</snmp_oid>
+                    <key>powerSupply1Status[{#SNMPVALUE}]</key>
+                    <delay>30s</delay>
+                    <applications>
+                        <application>
+                            <name>Power Supply</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Dell EMC Networking Switch Power Supply Status</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}=3</expression>
+                            <name>Power Supply 1 Critical</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}=6</expression>
+                            <name>Power Supply 1 Not Functioning</name>
+                            <priority>DISASTER</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}=5</expression>
+                            <name>Power Supply 1 Not Present</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}=4</expression>
+                            <name>Power Supply 1 Shutdown</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}=2</expression>
+                            <name>Power Supply 1 Warning</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Power Supply 2 Load</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.110.7.2.1.5.11</snmp_oid>
+                    <key>powerSupply2Load[{#SNMPVALUE}]</key>
+                    <units>W</units>
+                    <applications>
+                        <application>
+                            <name>Power Supply</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Power Supply 2 Status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.674.10895.3000.1.2.110.7.2.1.3.11</snmp_oid>
+                    <key>powerSupply2Status[{#SNMPVALUE}]</key>
+                    <applications>
+                        <application>
+                            <name>Power Supply</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Dell EMC Networking Switch Power Supply Status</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}=3</expression>
+                            <name>Power Supply 2 Critical</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}=6</expression>
+                            <name>Power Supply 2 Not Functioning</name>
+                            <priority>DISASTER</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}=5</expression>
+                            <name>Power Supply 2 Not Present</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}=4</expression>
+                            <name>Power Supply 2 Shutdown</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}=2</expression>
+                            <name>Power Supply 2 Warning</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Switch Total Load</name>
+                    <type>CALCULATED</type>
+                    <key>powerSupplyTotalLoad[{#SNMPVALUE}]</key>
+                    <units>W</units>
+                    <params>last(&quot;powerSupply1Load[{#SNMPVALUE}]&quot;)+last(&quot;powerSupply2Load[{#SNMPVALUE}]&quot;)</params>
+                    <applications>
+                        <application>
+                            <name>Power Supply</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Shitch Global Status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.110.1.0</snmp_oid>
+                    <key>productGlobalStatus[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <description>Current status of the product.This is a rollup for the entire product. The status is intended to give initiative to a snmp monitor to get further data when this status is abnormal. This variable can take the following values: 3: OK If fans and power supplies are functioning and the system did not reboot because of a HW watchdog failure or a SW fatal error condition. 4: Non-critical If at least one power supply is not functional or the system rebooted at least once because of a HW watchdog failure or a SW fatal error condition. 5: Critical If at least one fan is not functional, possibly causing a dangerous warming up of the device.</description>
+                    <applications>
+                        <application>
+                            <name>Status</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Dell EMC Networking Switch Global Status</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}=5</expression>
+                            <name>Switch Global Status Critical</name>
+                            <priority>DISASTER</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}=4</expression>
+                            <name>Switch Global Status Non-Critical</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Boot Rom Version</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.8.1.6.1</snmp_oid>
+                    <key>productIdentificationBootromVersion[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The boot image version of the product.</description>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>OS Build Number</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.5.0</snmp_oid>
+                    <key>productIdentificationBuildNumber[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The software build number of the product.</description>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Product Description</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.2.0</snmp_oid>
+                    <key>productIdentificationDescription[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>A short description of this product such as: Ethernet Router Switch.</description>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Device Network Name</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.7.0</snmp_oid>
+                    <key>productIdentificationDeviceNetworkName[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Device Name.</description>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Model</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.1.0</snmp_oid>
+                    <key>productIdentificationDisplayName[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Name of this product for display purposes.</description>
+                    <inventory_link>NAME</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Serial Number</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.8.1.2.1</snmp_oid>
+                    <key>productIdentificationSerialNumber[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Serial number of the product.</description>
+                    <inventory_link>SERIALNO_A</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Service Tag</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.8.1.4.1</snmp_oid>
+                    <key>productIdentificationServiceTag[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Service tag of the product.</description>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Management URL</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.6.0</snmp_oid>
+                    <key>productIdentificationURL[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The URL of the web-based application to manage this device, should the device provide one. The format of the value held by this object is: http://&lt;device IP address&gt;.</description>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Product Vendor</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.3.0</snmp_oid>
+                    <key>productIdentificationVendor[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The name of the product manufacturer, such as: Dell Inc.</description>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>OS Version</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.4.0</snmp_oid>
+                    <key>productIdentificationVersion[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The version of this product.</description>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Last Status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.110.2.0</snmp_oid>
+                    <key>productStatusLastGlobalStatus[{#SNMPVALUE}]</key>
+                    <description>The status before the current status which induced an initiative to issue a global status change trap.</description>
+                    <applications>
+                        <application>
+                            <name>Status</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Dell EMC Networking Switch Fan Status</name>
+                    </valuemap>
+                </item>
+                <item>
+                    <name>Asset tag of unit</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.674.10895.3000.1.2.100.8.1.3.1</snmp_oid>
+                    <key>roductIdentificationAssetTag[{#SNMPVALUE}]</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Asset tag of the product.</description>
+                    <inventory_link>ASSET_TAG</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Product Identification</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Switch Up Time</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.2.1.1.3.0</snmp_oid>
+                    <key>SwitchUpTime[{#SNMPVALUE}]</key>
+                    <value_type>FLOAT</value_type>
+                    <units>uptime</units>
+                    <description>The time (in hundredths of a second) since the network management portion of the system was last re-initialized.</description>
+                    <applications>
+                        <application>
+                            <name>Status</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>0.01</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Temperature CPU</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.674.10895.5000.2.6132.1.1.43.1.8.1.5.1.1</snmp_oid>
+                    <key>TempCPU[{#SNMPINDEX}]</key>
+                    <units>°C</units>
+                    <applications>
+                        <application>
+                            <name>Temperature</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Temperature MAC</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.674.10895.5000.2.6132.1.1.43.1.8.1.5.1.0</snmp_oid>
+                    <key>TempMac[{#SNMPVALUE}]</key>
+                    <units>°C</units>
+                    <applications>
+                        <application>
+                            <name>Temperature</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Temperature PHY (left side)</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.674.10895.5000.2.6132.1.1.43.1.8.1.5.1.2</snmp_oid>
+                    <key>TempPhyLeftSide[{#SNMPINDEX}]</key>
+                    <units>°C</units>
+                    <applications>
+                        <application>
+                            <name>Temperature</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Temperature PHY (right side)</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.674.10895.5000.2.6132.1.1.43.1.8.1.5.1.3</snmp_oid>
+                    <key>TempPhyRightSide[{#SNMPINDEX}]</key>
+                    <units>°C</units>
+                    <applications>
+                        <application>
+                            <name>Temperature</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Temperature System</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.674.10895.5000.2.6132.1.1.43.1.15.1.3.1</snmp_oid>
+                    <key>TempSystem[{#SNMPINDEX}]</key>
+                    <units>°C</units>
+                    <applications>
+                        <application>
+                            <name>Temperature</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Fan Discovery</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#FANNAME},1.3.6.1.4.1.674.10895.3000.1.2.110.7.1.1.2,{#FANOPERSTATUS},1.3.6.1.4.1.674.10895.3000.1.2.110.7.1.1.3,{#FANSPEED},1.3.6.1.4.1.674.10895.3000.1.2.110.7.1.1.4]</snmp_oid>
+                    <key>dell.networking.fans.discovery</key>
+                    <delay>1h</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#FANNAME}</macro>
+                                <value>@Fan</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#FANOPERSTATUS}</macro>
+                                <value>(1|2|3|4|5|6)</value>
+                                <formulaid>B</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>{#FANNAME} Speed</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.674.10895.3000.1.2.110.7.1.1.4.{#SNMPINDEX}</snmp_oid>
+                            <key>envMonFanSpeed.[fan{#SNMPINDEX}]</key>
+                            <delay>30s</delay>
+                            <units>rpm</units>
+                            <description>Speed of the fan being instrumented. Not&#13;
+Supported by Dell Modular Blade Server switches.</description>
+                            <applications>
+                                <application>
+                                    <name>Fans</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#FANNAME} Status</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.674.10895.3000.1.2.110.7.1.1.3.{#SNMPINDEX}</snmp_oid>
+                            <key>envMonFanStatus.[fan{#SNMPINDEX}]</key>
+                            <trends>0</trends>
+                            <description>The mandatory  state of the fan being instrumented.&#13;
+Not Supported by Dell Modular Blade Server switches.</description>
+                            <applications>
+                                <application>
+                                    <name>Fans</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>Dell EMC Networking Switch Fan Status</name>
+                            </valuemap>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=3</expression>
+                                    <name>{#FANNAME} is critical</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=6</expression>
+                                    <name>{#FANNAME} is not functioning</name>
+                                    <priority>DISASTER</priority>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=5</expression>
+                                    <name>{#FANNAME} is not present</name>
+                                    <priority>HIGH</priority>
+                                    <manual_close>YES</manual_close>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=4</expression>
+                                    <name>{#FANNAME} is shutdown</name>
+                                    <priority>HIGH</priority>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=2</expression>
+                                    <name>{#FANNAME} warning</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+    <value_maps>
+        <value_map>
+            <name>Dell EMC Networking Switch Fan Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Normal</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>Warning</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Critical</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>Shutdown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>Not Present</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>Not Functioning</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Dell EMC Networking Switch Global Status</name>
+            <mappings>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Ok</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>Non-Critical</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>Critical</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Dell EMC Networking Switch Power Supply Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Normal</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>Warning</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Critical</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>Shutdown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>Not Present</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>Not Functioning</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
